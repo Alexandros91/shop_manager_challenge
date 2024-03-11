@@ -1,6 +1,3 @@
-require_relative 'lib/database_connection'
-require_relative 'lib/item_repository'
-
 class Application
 
   def initialize(database_name, io, item_repository, order_repository)
@@ -33,5 +30,15 @@ class Application
       quantity = @io.gets.chomp
       @io.puts "You added a new item; #{name} that costs £#{price} with a quantity of #{quantity}!"
     end
+  end
+
+  if __FILE__ == $0
+    app = Application.new(
+      'shop_manager',
+      Kernel,
+      ItemRepository.new,
+      OrderRepository.new
+    )
+    app.run
   end
 end
