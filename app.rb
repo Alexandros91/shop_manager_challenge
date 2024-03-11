@@ -1,3 +1,5 @@
+require_relative 'lib/item_repository'
+
 class Application
 
   def initialize(database_name, io, item_repository, order_repository)
