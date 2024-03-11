@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'simplecov-console'
+require 'database_connection'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
@@ -7,6 +8,10 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   # SimpleCov::Formatter::HTMLFormatter
 ])
 SimpleCov.start
+
+# Make sure this connects to your test database
+# (its name should end with '_test')
+DatabaseConnection.connect('database_name_test')
 
 RSpec.configure do |config|
   config.after(:suite) do
