@@ -1,4 +1,6 @@
 require_relative 'lib/item_repository'
+require_relative 'lib/order_repository'
+require_relative 'lib/database_connection'
 
 class Application
 
