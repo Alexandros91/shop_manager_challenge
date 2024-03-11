@@ -31,6 +31,11 @@ class Application
       @io.puts 'Please enter the item\'s quantity:'
       quantity = @io.gets.chomp
       @io.puts "You added a new item; #{name} that costs £#{price} with a quantity of #{quantity}!"
+    elsif response == '3'
+      @io.puts 'Here is a list of all orders:'
+      @order_repository.all.each do |record|
+        @io.puts "##{record.id} #{record.customer_name} - Date of Order: #{record.date} with item id: #{record.item_id}"
+      end
     end
   end
 
