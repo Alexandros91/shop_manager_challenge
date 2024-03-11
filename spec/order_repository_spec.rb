@@ -50,4 +50,26 @@ RSpec.describe OrderRepository do
       expect(orders[5].item_id).to eq 2
     end
   end
+
+  describe '#create' do
+    it 'creates a new item and adds it to the orders table' do
+      repo = OrderRepository.new
+
+      new_order = Order.new
+      new_order.customer_name = 'Seventh customer'
+      new_order.date = '2024-03-12'
+      new_order.item_id = 3
+
+      repo.create(new_order)
+
+      orders = repo.all
+      last_order = orders.last
+
+      expect(orders.length). to eq 7
+      expect(last_order.id).to eq 7
+      expect(last_order.customer_name).to eq 'Seventh customer'
+      expect(last_order.date).to eq '2024-03-12'
+      expect(last_order.item_id).to eq 3
+    end
+  end
 end

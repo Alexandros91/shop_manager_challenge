@@ -3,7 +3,7 @@ require_relative './../app'
 RSpec.describe Application do
   describe '#run' do
     context 'when choosing 1' do
-      xit 'lists all items' do
+      it 'lists all items' do
         item_repository = double :item_repository
         order_repository = double :order_repository
         allow(item_repository).to receive(:all).and_return([
@@ -55,7 +55,7 @@ RSpec.describe Application do
           expect(io).to receive(:puts).and_return('Please enter the item\'s quantity:')
           expect(io).to receive(:gets).and_return('4')
           expect(io).to receive(:puts).and_return('You added a new item; First item that costs £4.50 with a quantity of 4!')
-          app = Application.new('shop_manager', io, item_repository, order_repository)
+          app = Application.new('shop_manager_test', io, item_repository, order_repository)
           app.run
         end
       end
