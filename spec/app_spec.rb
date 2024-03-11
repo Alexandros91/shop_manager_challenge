@@ -82,5 +82,50 @@ RSpec.describe Application do
         app.run
       end
     end
+
+    context 'when choosing 4' do
+      it 'creates a new order' do
+        item_repository = double :item_repository
+        order_repository = double :order_repository
+        new_order = {id: 4, customer_name: 'Customer 4', date: '2020/01/01', item_id: 1}
+        allow(order_repository).to receive(:create).with(new_order)
+        io = double :io
+        expect(io).to receive(:puts).and_return('Welcome to the shop management program!')
+        expect(io).to receive(:puts).and_return('What would you like to do?')
+        expect(io).to receive(:puts).and_return('* 1 - List all items')
+        expect(io).to receive(:puts).and_return('* 2 - Create a new item')
+        expect(io).to receive(:puts).and_return('* 3 - List all orders')
+        expect(io).to receive(:puts).and_return('* 4 - Create a new order')
+        expect(io).to receive(:puts).and_return('Please enter your choice:')
+        expect(io).to receive(:gets).and_return('4')
+        expect(io).to receive(:puts).and_return('Please enter the customer\'s name:')
+        expect(io).to receive(:gets).and_return('Customer 4')
+        expect(io).to receive(:puts).and_return('Please enter the order\'s date:')
+        expect(io).to receive(:gets).and_return('2020/01/01')
+        expect(io).to receive(:puts).and_return('Please enter the item\'s id:')
+        expect(io).to receive(:gets).and_return('1')
+        expect(io).to receive(:puts).and_return('You added a new order for Customer 4 on 2020/01/01 that includes the item with id 1!')
+        app = Application.new('shop_manager_test', io, item_repository, order_repository)
+        app.run
+      end
+    end
+
+    context 'when entering invalid input' do
+      it 'fails' do
+        item_repository = double :item_repository
+        order_repository = double :order_repository
+        io = double :io
+        expect(io).to receive(:puts).and_return('Welcome to the shop management program!')
+        expect(io).to receive(:puts).and_return('What would you like to do?')
+        expect(io).to receive(:puts).and_return('* 1 - List all items')
+        expect(io).to receive(:puts).and_return('* 2 - Create a new item')
+        expect(io).to receive(:puts).and_return('* 3 - List all orders')
+        expect(io).to receive(:puts).and_return('* 4 - Create a new order')
+        expect(io).to receive(:puts).and_return('Please enter your choice:')
+        expect(io).to receive(:gets).and_return('Hello')
+        app = Application.new('shop_manager_test', io, item_repository, order_repository)
+        expect { app.run }.to raise_error 'Invalid input! Please enter one nmber from 1 - 4.'
+      end
+    end
   end
 end

@@ -36,6 +36,16 @@ class Application
       @order_repository.all.each do |record|
         @io.puts "##{record.id} #{record.customer_name} - Date of Order: #{record.date} with item id: #{record.item_id}"
       end
+    elsif response == '4'
+      @io.puts 'Please enter the customer\'s name:'
+      customer_name = @io.gets.chomp
+      @io.puts 'Please enter the order\'s date:'
+      date = @io.gets.chomp
+      @io.puts 'Please enter the item\'s id:'
+      item_id = @io.gets.chomp
+      @io.puts "You added a new order for #{name} on #{date} that includes the item with id #{item_id}!"
+    else
+      fail 'Invalid input! Please enter one nmber from 1 - 4.'
     end
   end
 
