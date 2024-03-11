@@ -11,7 +11,7 @@ SimpleCov.start
 
 # Make sure this connects to your test database
 # (its name should end with '_test')
-DatabaseConnection.connect('database_name_test')
+DatabaseConnection.connect('shop_manager_test')
 
 RSpec.configure do |config|
   config.after(:suite) do
