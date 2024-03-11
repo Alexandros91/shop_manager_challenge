@@ -1,3 +1,5 @@
+require_relative 'lib/item_repository'
+
 class Application
 
   def initialize(database_name, io, item_repository, order_repository)
@@ -22,5 +24,15 @@ class Application
         @io.puts "##{record.id} #{record.name} - Unit price: £#{record.price} - Quantity: #{record.quantity}"
       end
     end
+  end
+
+  if __FILE__ == $0
+    app = Application.new(
+      'shop_manager',
+      Kernel,
+      ItemRepository.new,
+      OrderRepository.new
+    )
+    app.run
   end
 end
