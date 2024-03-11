@@ -32,7 +32,6 @@ class Application
       @io.puts 'Please enter the item\'s quantity:'
       quantity = @io.gets.chomp
       @io.puts "You added a new item; #{name} that costs £#{price} with a quantity of #{quantity}!"
-
     end
   end
 end

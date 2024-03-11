@@ -54,7 +54,7 @@ RSpec.describe Application do
           expect(io).to receive(:gets).and_return('4.50')
           expect(io).to receive(:puts).and_return('Please enter the item\'s quantity:')
           expect(io).to receive(:gets).and_return('4')
-          expect(io).to receive(:puts).and_return('Item successfully added!')
+          expect(io).to receive(:puts).and_return('You added a new item; First item that costs £4.50 with a quantity of 4!')
           app = Application.new('shop_manager', io, item_repository, order_repository)
           app.run
         end
