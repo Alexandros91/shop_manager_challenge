@@ -83,6 +83,11 @@ class Application
     @io.puts 'Please enter the item\'s id:'
     item_id = @io.gets.chomp
     @io.puts "You added a new order for #{customer_name} on #{date} that includes the item with id #{item_id}!"
+    new_order = Order.new
+    new_order.customer_name = customer_name
+    new_order.date = date
+    new_order.item_id = item_id.to_i
+    @order_repository.create(new_order)
   end
 end
 

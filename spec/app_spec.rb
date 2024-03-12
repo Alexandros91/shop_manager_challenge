@@ -91,7 +91,8 @@ RSpec.describe Application do
       it 'creates a new order' do
         item_repository = double :item_repository
         order_repository = double :order_repository
-        new_order = double :new_order
+        new_order = double :new_item
+        expect(Order).to receive(:new).and_return(new_order)
         io = double :io
         expect(io).to receive(:puts).and_return('Welcome to the shop management program!')
         expect(io).to receive(:puts).and_return('What would you like to do?')
@@ -108,6 +109,10 @@ RSpec.describe Application do
         expect(io).to receive(:puts).and_return('Please enter the item\'s id:')
         expect(io).to receive(:gets).and_return('1')
         expect(io).to receive(:puts).and_return('You added a new order for Customer 4 on 2020/01/01 that includes the item with id 1!')
+        expect(new_order).to receive(:customer_name=)
+        expect(new_order).to receive(:date=)
+        expect(new_order).to receive(:item_id=)
+        expect(order_repository).to receive(:create).with(new_order)
         app = Application.new('shop_manager_test', io, item_repository, order_repository)
         app.run
       end
