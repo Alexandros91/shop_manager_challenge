@@ -70,8 +70,7 @@ class Application
   def list_orders
     @io.puts 'Here is a list of all orders:'
     @order_repository.all.each do |record|
-      @io.puts "##{record.id} #{record.customer_name} - Date of Order: #{record.date} 
-      with item id: #{record.item_id}"
+      @io.puts "##{record.id} #{record.customer_name} - Date of Order: #{record.date} with item id: #{record.item_id}"
     end
   end
 
@@ -91,12 +90,12 @@ class Application
   end
 end
 
-# if __FILE__ == $0
-#   app = Application.new(
-#     'shop_manager',
-#     Kernel,
-#     ItemRepository.new,
-#     OrderRepository.new
-#   )
-#   app.run
-# end
+if __FILE__ == $0
+  app = Application.new(
+    'shop_manager',
+    Kernel,
+    ItemRepository.new,
+    OrderRepository.new
+  )
+  app.run
+end

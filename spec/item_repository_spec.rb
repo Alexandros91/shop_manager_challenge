@@ -3,7 +3,7 @@ require 'item_repository'
 RSpec.describe ItemRepository do
 
   def reset_items_table
-    seed_sql = File.read('seeds/orders.sql')
+    seed_sql = File.read('seeds/items.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'shop_manager_test' })
     connection.exec(seed_sql)
   end
