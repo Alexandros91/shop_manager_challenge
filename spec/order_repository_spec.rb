@@ -65,7 +65,7 @@ RSpec.describe OrderRepository do
       orders = repo.all
       last_order = orders.last
 
-      expect(orders.length). to eq 7
+      expect(orders.length).to eq 7
       expect(last_order.id).to eq 7
       expect(last_order.customer_name).to eq 'Seventh customer'
       expect(last_order.date).to eq '2024-03-12'

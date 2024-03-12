@@ -33,8 +33,8 @@ RSpec.describe Application do
       it 'creates a new item' do
         item_repository = double :item_repository
         order_repository = double :order_repository
-        new_item = {id: 4, name: 'Item 4', price: 4.50, quantity: 4}
-        allow(item_repository).to receive(:create).with(new_item)
+        new_item = double :new_item
+        expect(Item).to receive(:new).and_return(new_item)
         io = double :io
         expect(io).to receive(:puts).and_return('Welcome to the shop management program!')
         expect(io).to receive(:puts).and_return('What would you like to do?')
@@ -50,7 +50,11 @@ RSpec.describe Application do
         expect(io).to receive(:gets).and_return('4.50')
         expect(io).to receive(:puts).and_return('Please enter the item\'s quantity:')
         expect(io).to receive(:gets).and_return('4')
-        expect(io).to receive(:puts).and_return('You added a new item; First item that costs £4.50 with a quantity of 4!')
+        expect(io).to receive(:puts).and_return('You added a new item; Item 4 that costs £4.50 with a quantity of 4!')
+        expect(new_item).to receive(:name=)
+        expect(new_item).to receive(:price=)
+        expect(new_item).to receive(:quantity=)
+        expect(item_repository).to receive(:create).with(new_item)
         app = Application.new('shop_manager_test', io, item_repository, order_repository)
         app.run
       end
@@ -87,8 +91,7 @@ RSpec.describe Application do
       it 'creates a new order' do
         item_repository = double :item_repository
         order_repository = double :order_repository
-        new_order = {id: 4, customer_name: 'Customer 4', date: '2020/01/01', item_id: 1}
-        allow(order_repository).to receive(:create).with(new_order)
+        new_order = double :new_order
         io = double :io
         expect(io).to receive(:puts).and_return('Welcome to the shop management program!')
         expect(io).to receive(:puts).and_return('What would you like to do?')
